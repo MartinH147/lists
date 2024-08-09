@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useReducer } from 'react';
+import ListsScreen from './screens/ListsScreen'
+import WebScreen from './screens/WebScreen'
+import HomeScreen from './screens/HomeScreen'
+import NewList from './screens/NewList'
+import BlankList from './screens/BlankList'
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+const MyStack = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen
+          name='home'
+          component={HomeScreen}
+          options={{title: 'Home', headerShown: false}}
+        />
+        <Stack.Screen
+          name='newList'
+          component={NewList}
+          options={{title: 'NewList', headerShown: false}}
+        />
+        <Stack.Screen
+          name='blankList'
+          component={BlankList}
+          options={{title: 'BlankList', headerShown: false}}
+        />  
+        <Stack.Screen
+          name='lists'
+          component={ListsScreen}
+          options={{title: 'Lists', headerShown: false}}
+        />
+        <Stack.Screen
+          name='web'
+          component={WebScreen}
+          options={{title: 'Web', headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {  
+  return (  
+    <MyStack/>
+    );
+}
